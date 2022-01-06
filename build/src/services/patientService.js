@@ -22,8 +22,12 @@ const addPatient = (entry) => {
     patients_1.default.push(newPatientEntry);
     return newPatientEntry;
 };
+const getPatient = (patientId) => {
+    return patients_1.default.find((patient) => patient.id === patientId);
+};
 exports.default = {
     getEntries,
     getNonSensitiveEntries,
     addPatient,
+    getPatient,
 };

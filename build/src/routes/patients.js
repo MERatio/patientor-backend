@@ -21,4 +21,19 @@ router.post('/', (req, res) => {
         res.status(400).send(err.message);
     }
 });
+router.get('/:patientId', (req, res) => {
+    try {
+        const patient = patientService_1.default.getPatient(req.params.patientId);
+        if (patient === undefined) {
+            res.status(404);
+        }
+        else {
+            res.json(patient);
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }
+    catch (err) {
+        res.status(400).send(err.message);
+    }
+});
 exports.default = router;

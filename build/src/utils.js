@@ -36,13 +36,24 @@ const parseGender = (gender) => {
     }
     return gender;
 };
-const toNewPatientEntry = ({ name, dateOfBirth, ssn, gender, occupation, }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isEntries = (param) => {
+    return Array.isArray(param) && param.every((val) => isString(val));
+};
+const parseEntries = (entries) => {
+    if (!entries || !isEntries(entries)) {
+        throw new Error('Incorrect or missing entries');
+    }
+    return entries;
+};
+const toNewPatientEntry = ({ name, dateOfBirth, ssn, gender, occupation, entries, }) => {
     const newEntry = {
         name: parseStringValue('name', name),
         dateOfBirth: parseDateOfBirth(dateOfBirth),
         ssn: parseStringValue('ssn', ssn),
         gender: parseGender(gender),
         occupation: parseStringValue('occupation', occupation),
+        entries: parseEntries(entries),
     };
     return newEntry;
 };
