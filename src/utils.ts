@@ -43,7 +43,12 @@ const parseGender = (gender: unknown): Gender => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isEntries = (param: any): param is Entry[] => {
-	return Array.isArray(param) && param.every((val) => isString(val));
+	return (
+		Array.isArray(param) &&
+		param.every((val) =>
+			['OccupationalHealthcare', 'Hospital', 'HealthCheck'].includes(val.type)
+		)
+	);
 };
 
 const parseEntries = (entries: unknown): Entry[] => {
